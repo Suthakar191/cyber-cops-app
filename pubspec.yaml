@@ -1,0 +1,41 @@
+name: cyber_cop_app
+description: A new Flutter application.
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^0.1.2
+  audioplayers: ^0.13.0
+  font_awesome_flutter: ^8.4.0
+  pin_entry_text_field: ^0.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+
+flutter:
+
+
+  uses-material-design: true
+  assets:
+    - assets/
+    - images/
+  fonts:
+    - family: LakkiReddy
+      fonts:
+        - asset: fonts/LakkiReddy-Regular.ttf
+    - family: RubikMonoOne
+      fonts:
+        - asset: fonts/Merriweather-Bold.ttf
+
+
