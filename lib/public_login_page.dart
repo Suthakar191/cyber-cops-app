@@ -117,32 +117,11 @@ class _PublicLoginPageState extends State<PublicLoginPage> {
                         child: Padding(
                           padding: const EdgeInsets.only(right: 25),
                           child: TextField(
-                            controller: userId,
-                            decoration: InputDecoration(
-                              fillColor: Colors.lightBlue[100],
-                              border: InputBorder.none,
-                              hintText: '      Enter your userID ',
-                              hintStyle: kStylingText,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.blue[300],
-                            borderRadius: BorderRadius.circular(12.0)),
-                        width: MediaQuery.of(context).size.width * 0.8,
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 25),
-                          child: TextField(
                             controller: password,
                             decoration: InputDecoration(
                               fillColor: Colors.lightBlue[100],
                               border: InputBorder.none,
-                              hintText: '      Enter your password ',
+                              hintText: '      Enter your mobile number ',
                               hintStyle: kStylingText,
                             ),
                           ),
@@ -159,34 +138,7 @@ class _PublicLoginPageState extends State<PublicLoginPage> {
                                 publicUserId = userId.text;
                                 publicPassword = password.text;
                                 setState(() {});
-                                Navigator.pushNamed(context, '5');
-                              },
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.05,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Colors.lightBlue[700],
-                                    border: Border.all(
-                                        color: Colors.lightBlue[900])),
-                                child: Center(
-                                  child: Text(
-                                    'Login',
-                                    style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.lightBlue[100],
-                                        letterSpacing: 3.0,
-                                        fontFamily: 'Merriweather'),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                              onPressed: () {
-                                setState(() {});
+                                //checkLoginCredentials(publicUserId,publicPassword);
                                 Navigator.pushNamed(context, '4');
                               },
                               child: Container(
@@ -199,7 +151,7 @@ class _PublicLoginPageState extends State<PublicLoginPage> {
                                         color: Colors.lightBlue[900])),
                                 child: Center(
                                   child: Text(
-                                    'OTP-Verify',
+                                    'Login',
                                     style: TextStyle(
                                         fontSize: 18.0,
                                         fontWeight: FontWeight.bold,
