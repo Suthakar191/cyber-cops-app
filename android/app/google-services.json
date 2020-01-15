@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "502758126074",
+    "firebase_url": "https://cyber-cops-b7b77.firebaseio.com",
+    "project_id": "cyber-cops-b7b77",
+    "storage_bucket": "cyber-cops-b7b77.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502758126074:android:443a4e8da4b5118a02b443",
+        "android_client_info": {
+          "package_name": "com.sk.cyber_cop_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502758126074-ksnhjnar2f5911u11qjno0v7987ju17t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb8tClcJ8RwOto2mKwsZtBje7LhpV6u1s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502758126074-ksnhjnar2f5911u11qjno0v7987ju17t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -142,7 +142,7 @@ class _OtpVerificationState extends State<OtpVerification> {
     final PhoneCodeSent smsOTPSent = (String verId, [int forceCodeResend]) {
       this.verificationId = verId;
       smsOTPDialog(context).then((value) {
-        print('sign in');
+        print('sign ins');
       });
     };
     try {
@@ -198,8 +198,7 @@ class _OtpVerificationState extends State<OtpVerification> {
                 onPressed: () {
                   _auth.currentUser().then((user) {
                     if (user != null) {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacementNamed('/homepage');
+                      Navigator.pushNamed(context, '5');
                     } else {
                       signIn();
                     }
@@ -220,8 +219,7 @@ class _OtpVerificationState extends State<OtpVerification> {
       final FirebaseUser user = (await _auth.signInWithCredential(credential)) as FirebaseUser;
       final FirebaseUser currentUser = await _auth.currentUser();
       assert(user.uid == currentUser.uid);
-      Navigator.of(context).pop();
-      Navigator.of(context).pushReplacementNamed('/homepage');
+      Navigator.pushNamed(context, '5');
     } catch (e) {
       handleError(e);
     }
@@ -237,7 +235,7 @@ class _OtpVerificationState extends State<OtpVerification> {
         });
         Navigator.of(context).pop();
         smsOTPDialog(context).then((value) {
-          print('sign in');
+          print('sign inn');
         });
         break;
       default:
