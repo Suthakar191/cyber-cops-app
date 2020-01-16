@@ -1,6 +1,9 @@
 import 'package:card_settings/card_settings.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,10 +30,13 @@ class _SignUpPageState extends State<SignUpPage> {
   int mobile;
   String sex;
   String address;
-  DateTime showDateTime = DateTime(2000, 1, 1);
-
+  DateTime showDateTime = DateTime(2020, 01, 01);
+  String formattedDate;
+  String smsOTP;
+  String verificationId;
+  String errorMessage = '';
   bool _autoValidate = false;
-
+  bool _showMaterialonIOS = true;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -39,8 +45,133 @@ class _SignUpPageState extends State<SignUpPage> {
   final GlobalKey<FormState> addressKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _dateKey = GlobalKey<FormState>();
   final GlobalKey<FormState> _phoneKey = GlobalKey<FormState>();
+  final DbRef = FirebaseDatabase.instance.reference();
 
-  bool _showMaterialonIOS = true;
+  FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<void> verifyPhone() async {
+    final PhoneCodeSent smsOTPSent = (String verId, [int forceCodeResend]) {
+      this.verificationId = verId;
+      smsOTPDialog(context).then((value) {
+        print('sign in');
+      });
+    };
+    try {
+      await _auth.verifyPhoneNumber(
+          phoneNumber: this.mobInput, // PHONE NUMBER TO SEND OTP
+          codeAutoRetrievalTimeout: (String verId) {
+            //Starts the phone number verification process for the given phone number.
+            //Either sends an SMS with a 6 digit code to the phone number specified, or sign's the user in and [verificationCompleted] is called.
+            this.verificationId = verId;
+          },
+          codeSent:
+              smsOTPSent, // WHEN CODE SENT THEN WE OPEN DIALOG TO ENTER OTP.
+          timeout: const Duration(seconds: 20),
+          verificationCompleted: (AuthCredential phoneAuthCredential) {
+            print(phoneAuthCredential);
+          },
+          verificationFailed: (AuthException exceptio) {
+            print('${exceptio.message}');
+          });
+    } catch (e) {
+      handleError(e);
+    }
+  }
+
+  Future<bool> smsOTPDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+            title: Text('Enter SMS Code'),
+            content: Container(
+              height: 85,
+              child: Column(children: [
+                TextField(
+                  onChanged: (value) {
+                    this.smsOTP = value;
+                  },
+                ),
+                (errorMessage != ''
+                    ? Text(
+                        errorMessage,
+                        style: TextStyle(color: Colors.red),
+                      )
+                    : Container())
+              ]),
+            ),
+            contentPadding: EdgeInsets.all(10),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Done'),
+                onPressed: () {
+                  _auth.currentUser().then((user) {
+                    if (user != null) {
+                      Navigator.of(context).pop();
+                      writedata();
+                      Navigator.pushNamed(context, "3");
+                    } else {
+                      signIn();
+                    }
+                  });
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  signIn() async {
+    try {
+      final AuthCredential credential = PhoneAuthProvider.getCredential(
+        verificationId: verificationId,
+        smsCode: smsOTP,
+      );
+      AuthResult result = await _auth.signInWithCredential(credential);
+      final FirebaseUser user = result.user;
+      final FirebaseUser currentUser = await _auth.currentUser();
+      assert(user.uid == currentUser.uid);
+      Navigator.of(context).pop();
+      writedata();
+      Navigator.pushNamed(context, '3');
+    } catch (e) {
+      handleError(e);
+    }
+  }
+
+  handleError(PlatformException error) {
+    print(error);
+    switch (error.code) {
+      case 'ERROR_INVALID_VERIFICATION_CODE':
+        FocusScope.of(context).requestFocus(new FocusNode());
+        setState(() {
+          errorMessage = 'Invalid Code';
+        });
+        Navigator.of(context).pop();
+        smsOTPDialog(context).then((value) {
+          print('sign in');
+        });
+        break;
+      default:
+        setState(() {
+          errorMessage = error.message;
+        });
+
+        break;
+    }
+  }
+
+  void writedata() {
+    print("Inside writedata");
+    print("$name , $address, $sex , $formattedDate");
+    DbRef.child("User").child("$mobile").set({
+      "Address": "$address",
+      "Sex": "$sex",
+      "Dob": "$formattedDate",
+      "Name": "$name"
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +241,7 @@ class _SignUpPageState extends State<SignUpPage> {
           if (mobile.toString().length != 10) {
             _showSnackBar(Text('Please enter a valid mobile number.'));
           } else
-            Navigator.pushNamed(context, '3');
+            verifyPhone();
         } else {
           _showSnackBar(Text('Please fill in all the details.'));
         }
@@ -157,6 +288,9 @@ class _SignUpPageState extends State<SignUpPage> {
       onChanged: (value) {
         setState(() {
           showDateTime = value;
+          var dateRecorder = showDateTime.toString();
+          var date = DateTime.parse(dateRecorder);
+          formattedDate = "${date.day}-${date.month}-${date.year}";
         });
 //            'Show Date', updateJustDate(value, _ponyModel.showDateTime));
       },
