@@ -25,14 +25,13 @@ class _PoliceLoginState extends State<PoliceLogin> {
       backgroundColor: Colors.lightBlue[50],
       appBar: AppBar(
         backgroundColor: Colors.lightBlue[900],
-        title: Center(
-          child: Text('POLICE-LOGIN',
-              style: TextStyle(
-                  fontSize: 25.0,
-                  fontFamily: 'Merriweather',
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.0)),
-        ),
+        title: Text('POLICE-LOGIN',
+            style: TextStyle(
+                fontSize: 25.0,
+                fontFamily: 'Merriweather',
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.0)),
+        centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[
@@ -156,6 +155,7 @@ class _PoliceLoginState extends State<PoliceLogin> {
                         },
                         child: Container(
                           height: MediaQuery.of(context).size.height * 0.05,
+                          width: MediaQuery.of(context).size.width * 0.40,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20.0),
                               color: Colors.lightBlue[700],

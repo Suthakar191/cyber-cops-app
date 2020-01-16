@@ -83,40 +83,6 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-//                Container(
-//                  width: double.maxFinite,
-//                  decoration: BoxDecoration(
-//                      borderRadius: BorderRadius.circular(20),
-//                      gradient: LinearGradient(
-//                          begin: Alignment.topLeft,
-//                          end: Alignment.bottomRight,
-//                          stops: [
-//                            0.2,
-//                            0.4,
-//                            0.6,
-//                            0.9
-//                          ],
-//                          colors: [
-//                            Colors.lightBlue[900],
-//                            Colors.lightBlue[100],
-//                            Colors.lightBlue[300],
-//                            Colors.lightBlue[900],
-//                          ])),
-//                  child: Padding(
-//                    padding: const EdgeInsets.all(8.0),
-//                    child: Center(
-//                      child: Text(
-//                        "Loading...",
-//                        style: TextStyle(
-//                            fontSize: 20.0,
-//                            fontWeight: FontWeight.bold,
-//                            color: Colors.lightBlue[900],
-//                            letterSpacing: 8.0,
-//                            fontFamily: 'LakkiReddy'),
-//                      ),
-//                    ),
-//                  ),
-//                )
               ],
             ),
           ),

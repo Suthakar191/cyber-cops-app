@@ -1,4 +1,3 @@
-import 'package:audioplayers/audio_cache.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -13,10 +12,6 @@ ProfileType profileSelector = ProfileType.public;
 Color normalCardColor = kInactiveColour;
 Color policeCardColor = kInactiveColour;
 Color guestCardColor = kInactiveColour;
-void playSound(int soundNumber) {
-  final gobble = AudioCache();
-  gobble.play('sound$soundNumber.wav');
-}
 
 class LoginPageDecider extends StatefulWidget {
   @override
@@ -33,16 +28,15 @@ class _LoginPageDeciderState extends State<LoginPageDecider> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.lightBlue[900],
-          title: Center(
-            child: Text(
-              'LOGIN',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 25.0,
-              ),
+          title: Text(
+            'LOGIN',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 25.0,
             ),
           ),
+          centerTitle: true,
         ),
         body: SafeArea(
           child: Container(
@@ -68,7 +62,6 @@ class _LoginPageDeciderState extends State<LoginPageDecider> {
                         child: CardMaker(
                           onPressed: () {
                             setState(() {
-                              playSound(1);
                               profileSelector = ProfileType.public;
                             });
                           },
@@ -88,7 +81,6 @@ class _LoginPageDeciderState extends State<LoginPageDecider> {
                         child: CardMaker(
                           onPressed: () {
                             setState(() {
-                              playSound(1);
                               profileSelector = ProfileType.police;
                             });
                           },
@@ -113,25 +105,28 @@ class _LoginPageDeciderState extends State<LoginPageDecider> {
                     if (profileSelector == ProfileType.public) {
                       Navigator.pushNamed(context, '2');
                     } else {
-                      Navigator.pushNamed(context, '6');
+                      Navigator.pushNamed(context, '4');
                     }
                   },
                   child: Container(
-                    height: MediaQuery.of(context).size.height * 0.05,
+                    height: MediaQuery.of(context).size.height * 0.065,
                     width: MediaQuery.of(context).size.width * 0.45,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         color: Colors.lightBlue[700],
                         border: Border.all(color: Colors.lightBlue[900])),
                     child: Center(
-                      child: Text(
-                        'continue',
-                        style: TextStyle(
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.lightBlue[100],
-                            letterSpacing: 3.0,
-                            fontFamily: 'Merriweather'),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'continue',
+                          style: TextStyle(
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.lightBlue[100],
+                              letterSpacing: 3.0,
+                              fontFamily: 'Merriweather'),
+                        ),
                       ),
                     ),
                   ),
