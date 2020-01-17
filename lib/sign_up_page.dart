@@ -214,22 +214,39 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
 //    var orientation = MediaQuery.of(context).orientation;
 
-    return Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        backgroundColor: Colors.lightBlue[900],
-        title: Text('SIGN-UP',
-            style: TextStyle(
-                fontSize: 25.0,
-                fontFamily: 'Merriweather',
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.0)),
-        centerTitle: true,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        cardColor: Colors.lightBlue[100], // used for field backgrounds
+        buttonColor: Colors.lightBlue[900], // background color of buttons
+        textTheme: TextTheme(
+          button: TextStyle(
+              color: Colors.lightBlue[100],
+              fontSize: 20.0,
+              fontFamily: 'Merriweather',
+              fontWeight: FontWeight.bold,
+              letterSpacing: 1.0), // style of button text
+          subhead:
+              TextStyle(color: Colors.lightBlue[900]), // style of input text
+        ),
       ),
-      body: Form(
-        key: _formKey,
-        child: _buildPortraitLayout(),
+      home: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          backgroundColor: Colors.lightBlue[900],
+          title: Text('SIGN-UP',
+              style: TextStyle(
+                  fontSize: 25.0,
+                  fontFamily: 'Merriweather',
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.0)),
+          centerTitle: true,
+        ),
+        body: Form(
+          key: _formKey,
+          child: _buildPortraitLayout(),
+        ),
       ),
     );
   }
@@ -243,13 +260,15 @@ class _SignUpPageState extends State<SignUpPage> {
             showMaterialonIOS: _showMaterialonIOS,
             header: CardSettingsHeader(
               label: 'DETAILS',
+              labelAlign: TextAlign.center,
+              color: Colors.lightBlue[900],
               showMaterialonIOS: _showMaterialonIOS,
             ),
             children: <Widget>[
               nameGetter(),
               genderPicker(),
               datePicker(),
-              addressGetter(5),
+              addressGetter(3),
               phonrNoGetter(),
             ],
           ),
@@ -266,6 +285,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return CardSettingsButton(
       showMaterialonIOS: _showMaterialonIOS,
       label: 'Register',
+      bottomSpacing: 5,
       onPressed: () {
         print(mobInput);
         print(name);
