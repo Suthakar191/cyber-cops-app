@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
-        initialRoute: '2',
+        initialRoute: '0',
         routes: {
           '0': (context) => HomePage(),
           '1': (context) => LoginPageDecider(),
