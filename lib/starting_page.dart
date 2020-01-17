@@ -33,30 +33,22 @@ class _StartState extends State<Start> {
               child: ListView(
                 children: <Widget>[
                   UserAccountsDrawerHeader(
-                    accountName: Text(
-                      'Suthakar',
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
+                    accountName: Center(
+                      child: Text(
+                        'Cyber Cops',
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold),
+                      ),
                     ),
-                    accountEmail: Text(
-                      'sk@gmail.com',
-                      style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    decoration: BoxDecoration(color: Colors.lightBlue[900]),
                   ),
                   SizedBox(
                     height: 20.0,
                   ),
                   FlatButton(
                     onPressed: () {
-                      setState(() {
-                        playSound(1);
-                      });
+                      setState(() {});
                     },
                     child: Container(
                       margin: EdgeInsets.all(8.0),
@@ -133,60 +125,6 @@ class _StartState extends State<Start> {
                       width: double.maxFinite,
                     ),
                   ),
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        playSound(1);
-                      });
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.lightBlue[50],
-                          border: Border.all(color: Colors.lightBlue[900])),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'option 4',
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.lightBlue[900],
-                              letterSpacing: 3.0,
-                              fontFamily: 'Merriweather'),
-                        ),
-                      ),
-                      width: double.maxFinite,
-                    ),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {
-                        playSound(1);
-                      });
-                    },
-                    child: Container(
-                      margin: EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.lightBlue[50],
-                          border: Border.all(color: Colors.lightBlue[900])),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'option 5',
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.lightBlue[900],
-                              letterSpacing: 3.0,
-                              fontFamily: 'Merriweather'),
-                        ),
-                      ),
-                      width: double.maxFinite,
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -210,17 +148,21 @@ class _StartState extends State<Start> {
                       fontWeight: FontWeight.w900,
                       color: Colors.black38),
                 ),
-                content: Text(
-                  "Are you sure you want to exit?",
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.lightBlue[900]),
+                content: Container(
+                  decoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(25.0)),
+                  child: Text(
+                    "Are you sure you want to exit?",
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.lightBlue[900]),
+                  ),
                 ),
                 actions: <Widget>[
                   FlatButton(
                     child: Card(
-                        color: Colors.lightBlue[50],
+                        color: Colors.grey[100],
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
@@ -228,7 +170,7 @@ class _StartState extends State<Start> {
                             style: TextStyle(
                                 fontSize: 20.0,
                                 fontWeight: FontWeight.w900,
-                                color: Colors.green[800]),
+                                color: Colors.lightBlue[900]),
                           ),
                         )),
                     onPressed: () {
@@ -237,7 +179,7 @@ class _StartState extends State<Start> {
                   ),
                   FlatButton(
                     child: Card(
-                      color: Colors.lightBlue[50],
+                      color: Colors.grey[100],
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
@@ -245,7 +187,7 @@ class _StartState extends State<Start> {
                           style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.w900,
-                              color: Colors.red[600]),
+                              color: Colors.lightBlue[900]),
                         ),
                       ),
                     ),

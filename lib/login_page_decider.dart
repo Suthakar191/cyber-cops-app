@@ -1,3 +1,4 @@
+import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -21,24 +22,23 @@ class LoginPageDecider extends StatefulWidget {
 class _LoginPageDeciderState extends State<LoginPageDecider> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => Future.value(false),
-      child: Scaffold(
-        backgroundColor: Colors.lightBlue[50],
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.lightBlue[900],
-          title: Text(
-            'LOGIN',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 25.0,
-            ),
+    return Scaffold(
+      backgroundColor: Colors.lightBlue[50],
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.lightBlue[900],
+        title: Text(
+          'LOGIN',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25.0,
           ),
-          centerTitle: true,
         ),
-        body: SafeArea(
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: DoubleBackToCloseApp(
           child: Container(
             color: Colors.blue[100],
             child: Column(
@@ -133,6 +133,9 @@ class _LoginPageDeciderState extends State<LoginPageDecider> {
                 )
               ],
             ),
+          ),
+          snackBar: SnackBar(
+            content: Text('Tap again to exit.'),
           ),
         ),
       ),

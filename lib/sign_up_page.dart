@@ -1,9 +1,17 @@
 import 'package:card_settings/card_settings.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pin_entry_text_field/pin_entry_text_field.dart';
+
+const kStylingText = TextStyle(
+    fontSize: 23.0,
+    fontFamily: 'Merriweather',
+    fontWeight: FontWeight.bold,
+    color: Color(0xFF01579B),
+    letterSpacing: 1.0);
 
 void main() => runApp(MyApp());
 
@@ -30,7 +38,7 @@ class _SignUpPageState extends State<SignUpPage> {
   int mobile;
   String sex;
   String address;
-  DateTime showDateTime = DateTime(2020, 01, 01);
+  DateTime showDateTime = DateTime(2000, 01, 01);
   String formattedDate;
   String smsOTP;
   String verificationId;
@@ -84,14 +92,29 @@ class _SignUpPageState extends State<SignUpPage> {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return new AlertDialog(
-            title: Text('Enter SMS Code'),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            backgroundColor: Colors.lightBlue[50],
+            title: Text(
+              'Enter OTP Code',
+              style: kStylingText,
+            ),
             content: Container(
-              height: 85,
+              color: Colors.lightBlue[100],
+              height: 100,
+              width: MediaQuery.of(context).size.width * 1,
               child: Column(children: [
-                TextField(
-                  onChanged: (value) {
-                    this.smsOTP = value;
-                  },
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8.0, 15.0, 8.0, 6.0),
+                  child: PinEntryTextField(
+                    onSubmit: (value) {
+                      this.smsOTP = value;
+                    },
+                    showFieldAsBox: true,
+                    fields: 6,
+                    fontSize: 10.0,
+                    fieldWidth: 30.0,
+                  ),
                 ),
                 (errorMessage != ''
                     ? Text(
@@ -103,19 +126,33 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             contentPadding: EdgeInsets.all(10),
             actions: <Widget>[
-              FlatButton(
-                child: Text('Done'),
-                onPressed: () {
-                  _auth.currentUser().then((user) {
-                    if (user != null) {
-                      Navigator.of(context).pop();
-                      writedata();
-                      Navigator.pushNamed(context, "3");
-                    } else {
-                      signIn();
-                    }
-                  });
-                },
+              Center(
+                child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: Colors.lightBlue[100],
+                      border: Border.all(color: Colors.lightBlue[900])),
+                  child: FlatButton(
+                    child: Text('DONE',
+                        style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: 'Merriweather',
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF01579B),
+                            letterSpacing: 1.0)),
+                    onPressed: () {
+                      _auth.currentUser().then((user) {
+                        if (user != null) {
+                          Navigator.of(context).pop();
+                          writedata();
+                          Navigator.pushNamed(context, "3");
+                        } else {
+                          signIn();
+                        }
+                      });
+                    },
+                  ),
+                ),
               )
             ],
           );

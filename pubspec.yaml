@@ -17,6 +17,8 @@ dependencies:
   font_awesome_flutter: ^8.4.0
   pin_entry_text_field: ^0.1.4
   card_settings: ^1.5.5
+  animated_text_kit: ^2.0.0
+  double_back_to_close_app: ^0.1.2
 
 dev_dependencies:
   flutter_test:
