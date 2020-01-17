@@ -1,3 +1,4 @@
+import 'package:cyber_cop_app/map_tracking.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           '2': (context) => SignUpPage(),
           '3': (context) => Start(),
           '4': (context) => PoliceLogin(),
+          '5': (context) => FireMap(),
         });
   }
 }
