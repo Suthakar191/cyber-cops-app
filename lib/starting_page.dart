@@ -168,6 +168,8 @@ class _StartState extends State<Start> {
                   ),
                   FlatButton(
                     onPressed: () {
+                      Navigator.pushNamed(context, '7');
+
 //                      WRITE CODE HERE TO INTEGRATE MAP
                     },
                     child: Container(

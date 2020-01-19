@@ -151,6 +151,7 @@ class _PoliceLoginState extends State<PoliceLogin> {
                         onPressed: () {
                           policeUserId = policeId.text;
                           policePasscode = policePassword.text;
+                          Navigator.pushNamed(context, '7');
                           setState(() {});
                         },
                         child: Container(
