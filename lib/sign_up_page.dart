@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_entry_text_field/pin_entry_text_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const kStylingText = TextStyle(
     fontSize: 23.0,
@@ -286,7 +287,14 @@ class _SignUpPageState extends State<SignUpPage> {
       showMaterialonIOS: _showMaterialonIOS,
       label: 'Register',
       bottomSpacing: 5,
-      onPressed: () {
+      onPressed: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+        prefs.setString('mobileKey', mobInput);
+        prefs.setString('nameKey', name);
+        prefs.setString('addressKey', address);
+        prefs.setString('sexKey', sex);
+        prefs.setString('dateKey', formattedDate.toString());
         print(mobInput);
         print(name);
         print(sex);
@@ -349,7 +357,6 @@ class _SignUpPageState extends State<SignUpPage> {
           var date = DateTime.parse(dateRecorder);
           formattedDate = "${date.day}-${date.month}-${date.year}";
         });
-//            'Show Date', updateJustDate(value, _ponyModel.showDateTime));
       },
     );
   }

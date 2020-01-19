@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'complaint_registration.dart';
 import 'home_page.dart';
 import 'login_page_decider.dart';
+import 'media_evidence.dart';
 import 'police_login.dart';
 import 'sign_up_page.dart';
 import 'starting_page.dart';
@@ -22,6 +24,8 @@ class MyApp extends StatelessWidget {
           '2': (context) => SignUpPage(),
           '3': (context) => Start(),
           '4': (context) => PoliceLogin(),
+          '5': (context) => CompRegister(),
+          '6': (context) => EvidenceUploader(),
         });
   }
 }
